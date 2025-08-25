@@ -5,3 +5,10 @@ body,
   margin: 0;
   background: #000000;
 }
+
+.button {
+  position: absolute;
+  top: 250px;
+  left: 250px;
+  z-index: 1;
+}
