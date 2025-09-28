@@ -12,3 +12,15 @@ body,
   left: 250px;
   z-index: 1;
 }
+
+#info {
+  position: absolute;
+  top: 130px;
+  left: 10px;
+  background: #181c20;
+  color: #8c92a4;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 32px;
+  pointer-events: none;
+}
