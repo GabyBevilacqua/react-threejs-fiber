@@ -9,6 +9,7 @@ import {
 } from '@react-three/drei'
 import { useControls } from 'leva'
 import Models from './models.json'
+import { Perf } from 'r3f-perf'
 
 function Model({ url }) {
   const { scene } = useGLTF(url)
@@ -57,7 +58,7 @@ export default function App() {
           <Model url={Models[model]} />
         </group>
         <OrbitControls autoRotate />
-        <Stats />
+        <Perf position="top-left" />
       </Canvas>
       <span id="info">
         The {model.replace(/([A-Z])/g, ' $1').toLowerCase()} is selected.
