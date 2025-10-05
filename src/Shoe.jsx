@@ -33,7 +33,7 @@ export function Model() {
           [m]: {
             value:
               '#' +
-              ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, '0'),
+              ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, '0'), // random color para empezar, si se refresca cambia los colores cada vez
             onChange: (v) => {
               materials[m].color = new Color(v)
             },
@@ -51,8 +51,8 @@ export function Model() {
       dispose={null}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      onClick={(e) => {
-        e.stopPropagation()
+      onClick={(e) => {  // focus the material name on click para llegar mas rapido al elemento en los controles de leva
+        e.stopPropagation() // evita que el evento se propague a otros elementos al hacer click, selecciona el material que se ha clicado y no otro que este detras
         document.getElementById('Shoe.' + e.object.material.name).focus()
       }}
     >
