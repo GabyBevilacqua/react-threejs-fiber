@@ -6,12 +6,12 @@ body,
   background: #ebbdbd;
 }
 
-.button {
+/* .button {
   position: absolute;
   top: 250px;
   left: 250px;
   z-index: 1;
-}
+} */
 
 #info {
   position: absolute;
@@ -48,7 +48,7 @@ body,
   background: #ffdbb1;
 }
 
-h1 {
+/* h1 {
   position: absolute;
   top: 43px;
   left: 140px;
@@ -67,4 +67,4 @@ h1 {
   left: 170px;
   width: 90px !important;
   height: 90px !important;
-}
+} */

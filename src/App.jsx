@@ -1,35 +1,33 @@
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
-import { Model } from "./Shoe";
-import { HexColorPicker } from "react-colorful";
-import { useSnapshot } from "valtio"
-import { state } from "./state"
-import { Shoe2 } from "./Shoe2"
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
+import { Vector3 } from 'three'
+import { Stats, Environment, Center } from '@react-three/drei'
+import Button from './Button'
 
-function Picker() {
-  const snap = useSnapshot(state)
-  return (
-    <div style={{ display: snap.current ? "block" : "none", position: "absolute", top: 40, left: 110 }}>
-      <HexColorPicker color={snap.items[snap.current]} onChange={(color) => (state.items[snap.current] = color)} />
-      <h3 style={{ color: "#070707ff", marginTop: "10px", fontSize: "46px" }}>{snap.current}</h3>
-    </div>
-  )
+const vec = new Vector3()
+
+function Rig() {
+  return useFrame(({ camera, pointer }) => {
+    vec.set(pointer.x * 2, pointer.y * 2, camera.position.z)
+    camera.position.lerp(vec, 0.025)
+    camera.lookAt(0, 0, 0)
+  })
 }
 
 export default function App() {
   return (
-    <>
-      <Canvas shadows camera={{ position: [0, 0, 4], fov: 45 }}>
-        <ambientLight intensity={0.7} />
-        <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
-        <Shoe2 />
-        <Environment preset="city" />
-        <ContactShadows position={[0, -0.8, 0]} opacity={0.25} scale={10} blur={1.5} far={0.8} />
-        <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableZoom={true} enablePan={false} />
-      </Canvas>
-      <Picker />
-    </>
-  );
+    <Canvas camera={{ position: [0, 0, 5] }}>
+      <Environment  files="/img/ballawley_park_1k.hdr" background />
+      <Center>  {/* centra los objetos hijos */}
+        {[...Array(5).keys()].map((x) =>
+          [...Array(3).keys()].map((y) => (
+            <Button key={x + y * 5} position={[x * 2.5, y * 2.5, 0]} />
+          ))
+        )}
+      </Center>
+      <Rig />
+      <Stats />
+    </Canvas>
+  )
 }
 
 // import { Canvas } from "@react-three/fiber";
